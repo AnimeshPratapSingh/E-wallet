@@ -8,6 +8,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/v1", rootRouter);
+// Use the API prefix '/api' instead of '/api/v1' if your routes expect that
+app.use("/api", rootRouter);
 
-app.listen(3000,()=>{console.log("connection successful")});
+// Root route to test server is running
+app.get('/', (req, res) => {
+  res.send('Backend server is running!');
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
